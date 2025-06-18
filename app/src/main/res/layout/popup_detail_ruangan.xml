@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/popupDetail"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:gravity="center_horizontal"
+    android:padding="16dp"
+    android:background="@drawable/bg_popup"
+    android:elevation="6dp">
+
+    <!-- Baris: Nama ruang + bookmark -->
+    <LinearLayout
+        android:orientation="horizontal"
+        android:minHeight="70dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:gravity="center_vertical">
+
+        <TextView
+            android:id="@+id/tvRoomName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="Ruang F4.1"
+            android:textStyle="bold"
+            android:textSize="28sp"
+            android:textColor="@color/biru"
+            android:maxLines="2"
+            android:ellipsize="end"
+            android:textAlignment="center"
+            android:fontFamily="@font/josefinsans_regular"/>
+
+        <ImageButton
+            android:id="@+id/btnBookmark"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:background="@null"
+            android:src="@drawable/ic_bookmark" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tvRoomType"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Ruang Kelas"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:textColor="#A1BCF3"
+        android:fontFamily="@font/poppins_regular"/>
+
+    <!-- Label Status -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Status Ruangan"
+        android:textSize="14sp"
+        android:textColor="@color/black"
+        android:layout_marginTop="16dp"
+        android:textStyle="bold"
+        android:fontFamily="@font/poppins_regular"/>
+
+    <!-- Isi Status bergaya tombol -->
+    <TextView
+        android:id="@+id/tvStatus"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_status"
+        android:paddingHorizontal="12dp"
+        android:paddingVertical="6dp"
+        android:gravity="center"
+        android:text="Kosong"
+        android:textSize="20dp"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:elevation="4dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginHorizontal="8dp"
+        android:fontFamily="@font/poppins_regular"/>
+
+    <!-- Label Jadwal -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Aktivitas Berikutnya"
+        android:textSize="14sp"
+        android:textColor="@color/black"
+        android:layout_marginTop="20dp"
+        android:textStyle="bold"
+        android:fontFamily="@font/poppins_regular"/>
+
+    <!-- Isi Jadwal bergaya tombol -->
+    <TextView
+        android:id="@+id/tvNextActivity"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_status"
+        android:paddingHorizontal="12dp"
+        android:paddingVertical="6dp"
+        android:gravity="center"
+        android:text="12.00 - 14.00"
+        android:textSize="20dp"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:elevation="4dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginHorizontal="8dp"
+        android:layout_marginBottom="10dp"
+        android:fontFamily="@font/poppins_regular"/>
+
+</LinearLayout>

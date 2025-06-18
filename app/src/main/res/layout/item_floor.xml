@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- res/layout/item_floor.xml -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:gravity="center"
+    android:padding="8dp"
+    app:cardCornerRadius="16dp"
+    app:cardElevation="6dp"
+    app:cardUseCompatPadding="true">
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnFloor"
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:text="Lantai 1"
+        android:background="@drawable/rounded_button_blue"
+        android:textColor="@android:color/white"
+        android:paddingHorizontal="24dp"
+        android:paddingVertical="8dp"
+        app:backgroundTint="@null"
+        android:fontFamily="@font/poppins_regular"/>
+</LinearLayout>

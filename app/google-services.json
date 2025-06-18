@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "213826687719",
+    "project_id": "projekpam-861dd",
+    "storage_bucket": "projekpam-861dd.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:213826687719:android:ef08ea236e3dcf8874c842",
+        "android_client_info": {
+          "package_name": "com.example.projekgabunganpam"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAV58Re0S6wLskVAG5WQknuzm0XKIYFfcM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

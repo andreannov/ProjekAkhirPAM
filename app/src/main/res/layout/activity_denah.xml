@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="0dp"
+    android:background="@color/birumuda">
+
+    <!-- Tombol Back -->
+    <ImageButton
+        android:id="@+id/btnBack"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:layout_gravity="start"
+        android:layout_marginTop="32dp"
+        android:layout_marginHorizontal="24dp"
+        android:background="@android:color/transparent"
+        android:scaleType="fitCenter"
+        android:src="@drawable/ic_back" />
+
+    <!-- Judul Floor Map -->
+    <TextView
+        android:id="@+id/tvTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Floor Map"
+        android:fontFamily="@font/poppins_regular"
+        android:textSize="32sp"
+        android:textStyle="bold"
+        android:textColor="@color/biru"
+        android:layout_marginTop="16dp"
+        android:layout_gravity="center_horizontal" />
+
+    <!-- FrameLayout: Denah + Pin-pin -->
+    <FrameLayout
+        android:id="@+id/frameDenah"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_margin="16dp">
+
+        <!-- Denah (zoomable) -->
+        <com.github.chrisbanes.photoview.PhotoView
+            android:id="@+id/ivDenah"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="fitCenter"
+            android:contentDescription="Denah Lantai" />
+
+        <!-- Pin container: pin akan ditambahkan secara dinamis ke sini -->
+        <FrameLayout
+            android:id="@+id/pinContainer"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </FrameLayout>
+</LinearLayout>
