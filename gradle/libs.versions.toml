@@ -12,6 +12,7 @@ googleid = "1.1.0"
 activityKtx = "1.9.0"
 constraintlayout = "2.1.4"
 googleGmsPlugin = "4.4.2"
+firebaseBom = "33.1.2" # <-- VERSI BOM DITAMBAHKAN
 
 [libraries]
 junit = { group = "junit", name = "junit", version.ref = "junit" }
@@ -24,6 +25,7 @@ play-services-auth = { group = "com.google.android.gms", name = "play-services-a
 googleid = { group = "androidx.credentials", name = "credentials-play-services-auth", version.ref = "googleid" }
 activity-ktx = { group = "androidx.activity", name = "activity-ktx", version.ref = "activityKtx" }
 constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraintlayout" }
+firebase-bom = { group = "com.google.firebase", name = "firebase-bom", version.ref = "firebaseBom" } # <-- LIBRARY BOM DITAMBAHKAN
 
 [plugins]
 android-application = { id = "com.android.application", version = "8.8.0" }

@@ -18,8 +18,8 @@ public class ActivityLandingPage extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        // Pastikan nama file XML Anda adalah activity_landing_page.xml
-        setContentView(R.layout.activity_landing_page);
+        // Pastikan nama file XML Anda adalah activity_landing_page2.xml
+        setContentView(R.layout.activity_landing_page2);
 
         // Panggil metode untuk inisialisasi view
         initializeViews();
