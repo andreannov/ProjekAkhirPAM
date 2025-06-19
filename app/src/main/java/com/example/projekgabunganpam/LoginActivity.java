@@ -1,5 +1,6 @@
 package com.example.projekgabunganpam;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Html;
 import android.text.TextUtils;
@@ -8,9 +9,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.appcompat.app.AppCompatActivity;
-
 import com.google.firebase.auth.FirebaseAuth;
 
 public class LoginActivity extends AppCompatActivity {
@@ -52,20 +51,22 @@ public class LoginActivity extends AppCompatActivity {
                     .addOnCompleteListener(task -> {
                         if(task.isSuccessful()) {
                             Toast.makeText(this, "Login berhasil!", Toast.LENGTH_SHORT).show();
-                            // Setelah login berhasil, masuk ke DashboardActivity
-//                            startActivity(new Intent(LoginActivity.this, DashboardActivity.class));
-//                            finish();
+                            // == PERBAIKAN LOGIKA ==
+                            // Navigasi ke DashboardActivity setelah login berhasil
+                            startActivity(new Intent(LoginActivity.this, DashboardActivity.class));
+                            finish();
                         } else {
                             Toast.makeText(this, "Login gagal: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                         }
                     });
         });
 
-        // Aksi klik "Sign Up"
-//        tvGoToRegister.setOnClickListener(v -> {
-//            Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
-//            startActivity(intent);
-//        });
+        // == PERBAIKAN LOGIKA ==
+        // Aksi klik "Sign Up" untuk pindah ke halaman pendaftaran
+        tvGoToRegister.setOnClickListener(v -> {
+            Intent intent = new Intent(LoginActivity.this, ActivitySignUp.class);
+            startActivity(intent);
+        });
 
         // Aksi tombol back
         btnBack.setOnClickListener(v -> {
