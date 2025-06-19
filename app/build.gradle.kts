@@ -42,6 +42,9 @@ android {
         implementation("androidx.cardview:cardview:1.0.0")
         implementation("com.github.bumptech.glide:glide:4.16.0")
         annotationProcessor("com.github.bumptech.glide:compiler:4.16.0")
+        implementation("com.google.firebase:firebase-appcheck-safetynet:16.1.2") // SafetyNet adalah provider lama, namun sering digunakan bersama reCAPTCHA
+        implementation("com.google.firebase:firebase-appcheck-playintegrity:17.1.2") // Provider yang lebih baru
+
 
         // [PERBAIKAN 2: Tambahkan Firebase BoM]
         // Ini akan mengatur versi semua library Firebase secara otomatis agar kompatibel.
