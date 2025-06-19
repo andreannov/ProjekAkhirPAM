@@ -11,7 +11,8 @@ activityKtx = "1.9.0"
 constraintlayout = "2.1.4"
 googleGmsPlugin = "4.4.2"
 firebaseBom = "33.1.2"
-firebaseAppcheck = "18.0.0" # <-- [PERBAIKAN] VERSI APP CHECK DITAMBAHKAN
+firebaseAppcheck = "18.0.0"
+firebaseFirestore = "25.0.0" # <-- [PERUBAHAN] VERSI FIRESTORE DITAMBAHKAN
 
 [libraries]
 junit = { group = "junit", name = "junit", version.ref = "junit" }
@@ -25,7 +26,8 @@ googleid = { group = "androidx.credentials", name = "credentials-play-services-a
 activity-ktx = { group = "androidx.activity", name = "activity-ktx", version.ref = "activityKtx" }
 constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraintlayout" }
 firebase-bom = { group = "com.google.firebase", name = "firebase-bom", version.ref = "firebaseBom" }
-firebase-appcheck-playintegrity = { group = "com.google.firebase", name = "firebase-appcheck-playintegrity", version.ref = "firebaseAppcheck" } # <-- [PERBAIKAN] LIBRARY APP CHECK DITAMBAHKAN
+firebase-appcheck-playintegrity = { group = "com.google.firebase", name = "firebase-appcheck-playintegrity", version.ref = "firebaseAppcheck" }
+firebase-firestore = { group = "com.google.firebase", name = "firebase-firestore-ktx", version.ref = "firebaseFirestore" } # <-- [PERUBAHAN] LIBRARY FIRESTORE DITAMBAHKAN
 
 [plugins]
 android-application = { id = "com.android.application", version = "8.8.0" }

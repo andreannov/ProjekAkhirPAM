@@ -13,9 +13,17 @@ import java.util.List;
 public class FloorAdapter extends RecyclerView.Adapter<FloorAdapter.FloorViewHolder> {
 
     private List<Integer> floorList;
+    private OnFloorClickListener listener; // <-- [PERUBAHAN] Tambahkan listener
 
-    public FloorAdapter(List<Integer> floorList) {
+    // [PERUBAHAN] Buat interface untuk click listener
+    public interface OnFloorClickListener {
+        void onFloorClick(int floorNumber);
+    }
+
+    // [PERUBAHAN] Modifikasi constructor untuk menerima listener
+    public FloorAdapter(List<Integer> floorList, OnFloorClickListener listener) {
         this.floorList = floorList;
+        this.listener = listener;
     }
 
     @NonNull
@@ -29,8 +37,14 @@ public class FloorAdapter extends RecyclerView.Adapter<FloorAdapter.FloorViewHol
     @Override
     public void onBindViewHolder(@NonNull FloorViewHolder holder, int position) {
         int floorNumber = floorList.get(position);
-        holder.btnFloor.setText("Lantai " + floorNumber);
-        // Tambahkan onclick jika ingin aksi saat tombol diklik
+        holder.btnFloor.setText("LANTAI " + floorNumber);
+
+        // [PERUBAHAN] Tambahkan OnClickListener ke tombol
+        holder.btnFloor.setOnClickListener(v -> {
+            if (listener != null) {
+                listener.onFloorClick(floorNumber);
+            }
+        });
     }
 
     @Override

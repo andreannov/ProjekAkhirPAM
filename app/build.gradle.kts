@@ -32,31 +32,31 @@ android {
         targetCompatibility = JavaVersion.VERSION_17
     }
 }
-    dependencies {
-        // Dependensi dasar
-        implementation(libs.appcompat)
-        implementation(libs.material)
-        implementation("com.github.chrisbanes:PhotoView:2.3.0")
-        implementation("androidx.recyclerview:recyclerview:1.3.2")
-        implementation("androidx.cardview:cardview:1.0.0")
-        implementation("com.github.bumptech.glide:glide:4.16.0")
-        annotationProcessor("com.github.bumptech.glide:compiler:4.16.0")
 
-        // Firebase BoM
-        implementation(platform(libs.firebase.bom))
+dependencies {
+    // Dependensi dasar
+    implementation(libs.appcompat)
+    implementation(libs.material)
+    implementation("com.github.chrisbanes:PhotoView:2.3.0")
+    implementation("androidx.recyclerview:recyclerview:1.3.2")
+    implementation("androidx.cardview:cardview:1.0.0")
+    implementation("com.github.bumptech.glide:glide:4.16.0")
+    annotationProcessor("com.github.bumptech.glide:compiler:4.16.0")
 
-        // [PERBAIKAN] Tambahkan library App Check di sini
-        implementation(libs.firebase.appcheck.playintegrity)
+    // Firebase BoM
+    implementation(platform(libs.firebase.bom))
 
-        // Dependensi Firebase lainnya
-        implementation(libs.firebase.auth)
-        implementation(libs.play.services.auth)
-        implementation(libs.googleid)
-        implementation(libs.activity.ktx)
-        implementation(libs.constraintlayout)
+    // Dependensi Firebase
+    implementation(libs.firebase.appcheck.playintegrity)
+    implementation(libs.firebase.auth)
+    implementation(libs.firebase.firestore) // <-- [PERUBAHAN] DEPENDENSI FIRESTORE DITAMBAHKAN
+    implementation(libs.play.services.auth)
+    implementation(libs.googleid)
+    implementation(libs.activity.ktx)
+    implementation(libs.constraintlayout)
 
-        // Dependensi untuk Testing
-        testImplementation(libs.junit)
-        androidTestImplementation(libs.ext.junit)
-        androidTestImplementation(libs.espresso.core)
-    }
+    // Dependensi untuk Testing
+    testImplementation(libs.junit)
+    androidTestImplementation(libs.ext.junit)
+    androidTestImplementation(libs.espresso.core)
+}

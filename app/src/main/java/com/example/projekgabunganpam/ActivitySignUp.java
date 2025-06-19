@@ -3,6 +3,7 @@ package com.example.projekgabunganpam;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.util.Patterns;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -13,6 +14,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.FirebaseFirestore; // <-- [PERUBAHAN] Import Firestore
+
+import java.util.HashMap; // <-- [PERUBAHAN] Import HashMap
+import java.util.Map; // <-- [PERUBAHAN] Import Map
 
 public class ActivitySignUp extends AppCompatActivity {
 
@@ -20,8 +25,6 @@ public class ActivitySignUp extends AppCompatActivity {
     private MaterialButton btnSignUp;
     private TextView tvLoginLink;
     private ImageButton btnBack;
-
-    // Tambahkan instance FirebaseAuth
     private FirebaseAuth mAuth;
 
     @Override
@@ -29,9 +32,7 @@ public class ActivitySignUp extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
 
-        // Inisialisasi Firebase Auth
         mAuth = FirebaseAuth.getInstance();
-
         initializeViews();
         setupListeners();
     }
@@ -47,16 +48,12 @@ public class ActivitySignUp extends AppCompatActivity {
 
     private void setupListeners() {
         btnBack.setOnClickListener(v -> finish());
-
         tvLoginLink.setOnClickListener(v -> {
             Intent intent = new Intent(ActivitySignUp.this, LoginActivity.class);
             startActivity(intent);
             finish();
         });
-
-        btnSignUp.setOnClickListener(v -> {
-            validateAndSignUp();
-        });
+        btnSignUp.setOnClickListener(v -> validateAndSignUp());
     }
 
     private void validateAndSignUp() {
@@ -69,33 +66,40 @@ public class ActivitySignUp extends AppCompatActivity {
             etName.requestFocus();
             return;
         }
-
         if (TextUtils.isEmpty(email) || !Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
             etEmail.setError("Masukkan email yang valid");
             etEmail.requestFocus();
             return;
         }
-
         if (password.length() < 6) {
             etPassword.setError("Password minimal 6 karakter");
             etPassword.requestFocus();
             return;
         }
 
-        // == PERBAIKAN LOGIKA ==
-        // Proses pendaftaran pengguna baru ke Firebase
         mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, task -> {
                     if (task.isSuccessful()) {
-                        // Pendaftaran ke Firebase berhasil
-                        Toast.makeText(ActivitySignUp.this, "Pendaftaran berhasil!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(ActivitySignUp.this, "Pendaftaran akun berhasil!", Toast.LENGTH_SHORT).show();
 
-                        // Arahkan ke halaman Login agar pengguna bisa login dengan akun baru
+                        // [PERUBAHAN] Menyimpan data tambahan (nama & email) ke Firestore
+                        FirebaseFirestore db = FirebaseFirestore.getInstance();
+                        String userId = mAuth.getCurrentUser().getUid();
+
+                        Map<String, Object> user = new HashMap<>();
+                        user.put("name", name);
+                        user.put("email", email);
+                        // Tambahkan field lain jika perlu, misal: user.put("nim", "12345");
+
+                        db.collection("users").document(userId).set(user)
+                                .addOnSuccessListener(aVoid -> Log.d("Firestore", "User profile created for " + userId))
+                                .addOnFailureListener(e -> Log.w("Firestore", "Error creating user profile", e));
+
+                        // Arahkan ke halaman Login
                         Intent intent = new Intent(ActivitySignUp.this, LoginActivity.class);
                         startActivity(intent);
-                        finishAffinity(); // Tutup semua activity sebelumnya
+                        finishAffinity();
                     } else {
-                        // Jika pendaftaran gagal, tampilkan pesan error dari Firebase
                         Toast.makeText(ActivitySignUp.this, "Pendaftaran Gagal: " + task.getException().getMessage(),
                                 Toast.LENGTH_LONG).show();
                     }

@@ -1,5 +1,6 @@
 package com.example.projekgabunganpam;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.RectF;
 import android.os.Bundle;
@@ -30,21 +31,21 @@ public class DenahActivity extends AppCompatActivity {
 
     private PhotoView photoView;
     private FrameLayout pinContainer;
-
-    // Menyimpan referensi semua pin dan posisinya
     private final List<ImageView> pinViews = new ArrayList<>();
     private final HashMap<ImageView, Pair<Double, Double>> pinPositions = new HashMap<>();
-
     private Set<String> bookmarkedRooms;
 
-    // Uji coba
-    private String gedung = "F";
-    private int lantai = 1;
+    private String gedung;
+    private int lantai;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_denah);
+
+        Intent intent = getIntent();
+        gedung = intent.getStringExtra("GEDUNG");
+        lantai = intent.getIntExtra("LANTAI", 1);
 
         photoView = findViewById(R.id.ivDenah);
         pinContainer = findViewById(R.id.pinContainer);
@@ -52,34 +53,51 @@ public class DenahActivity extends AppCompatActivity {
         ImageButton btnBack = findViewById(R.id.btnBack);
         btnBack.setOnClickListener(v -> finish());
 
-        // Load bookmark dari SharedPreferences
+        TextView tvTitle = findViewById(R.id.tvTitle);
+        // Memastikan judul tetap benar
+        if (gedung != null) {
+            tvTitle.setText("Denah " + gedung + " - Lantai " + lantai);
+        }
+
         bookmarkedRooms = loadBookmarks();
 
-        // Set gambar denah
         int denahResId = getDenahResource(gedung, lantai);
         if (denahResId != 0) {
             photoView.setImageResource(denahResId);
             photoView.setMaximumScale(5.0f);
             photoView.setOnMatrixChangeListener(rect -> updatePinPositions());
         } else {
-            Toast.makeText(this, "Denah tidak ditemukan", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Denah untuk " + gedung + " Lantai " + lantai + " tidak ditemukan", Toast.LENGTH_LONG).show();
+            photoView.setImageResource(R.drawable.denah_lantaidummy); // Tampilkan gambar dummy jika denah tidak ada
         }
 
-        // Tambahkan semua pin
         List<PinData> pinList = getAllPins();
         for (PinData pin : pinList) {
-            if (pin.gedung.equals(gedung) && pin.lantai == lantai) {
+            if (gedung != null && gedung.toLowerCase().contains(pin.gedung.toLowerCase()) && pin.lantai == lantai) {
                 addPin(pin);
             }
         }
     }
 
+    // [PERBAIKAN] Logika untuk membuat nama resource file yang benar ada di sini
     private int getDenahResource(String gedung, int lantai) {
-        // Logika ini diasumsikan sudah memiliki drawable yang sesuai
-        // Contoh: R.drawable.denah_lantaif1, R.drawable.denah_lantaif2, dst.
-        String resourceName = "denah_lantai" + gedung.toLowerCase() + lantai;
-        int resourceId = getResources().getIdentifier(resourceName, "drawable", getPackageName());
-        return resourceId;
+        if (gedung == null || gedung.isEmpty()) {
+            return 0;
+        }
+
+        // Mengambil huruf terakhir dari string "Gedung F" -> "F"
+        String buildingInitial = "";
+        String[] parts = gedung.split(" ");
+        if (parts.length > 1) {
+            buildingInitial = parts[parts.length - 1]; // Mengambil bagian terakhir, yaitu "F" atau "G"
+        } else {
+            buildingInitial = gedung; // Jika inputnya hanya "F", gunakan itu
+        }
+
+        // Membuat nama resource: "denah_lantaif1", "denah_lantaig2", dst.
+        String resourceName = "denah_lantai" + buildingInitial.toLowerCase() + lantai;
+
+        return getResources().getIdentifier(resourceName, "drawable", getPackageName());
     }
 
     private void addPin(PinData pin) {
@@ -87,7 +105,6 @@ public class DenahActivity extends AppCompatActivity {
         pinView.setImageResource(R.drawable.ic_pin);
         pinView.setContentDescription(pin.getRoomName());
 
-        // SET UKURAN PIN (misal 32dp x 32dp)
         int sizeInDp = 32;
         int sizeInPx = (int) TypedValue.applyDimension(
                 TypedValue.COMPLEX_UNIT_DIP,
@@ -96,20 +113,16 @@ public class DenahActivity extends AppCompatActivity {
         );
         FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(sizeInPx, sizeInPx);
         pinView.setLayoutParams(params);
-
-        // Klik pin
         pinView.setOnClickListener(v -> showPopup(pin));
 
         pinContainer.addView(pinView);
         pinViews.add(pinView);
         pinPositions.put(pinView, new Pair<>(pin.xRatio, pin.yRatio));
-
         pinContainer.post(this::updatePinPositions);
     }
 
     private void updatePinPositions() {
         if (photoView.getDrawable() == null) return;
-
         RectF displayRect = photoView.getDisplayRect();
         if (displayRect == null) return;
 
@@ -136,7 +149,6 @@ public class DenahActivity extends AppCompatActivity {
 
     private void showPopup(PinData pinData) {
         View popupView = LayoutInflater.from(this).inflate(R.layout.popup_detail_ruangan, null);
-
         TextView tvRoomName = popupView.findViewById(R.id.tvRoomName);
         TextView tvRoomType = popupView.findViewById(R.id.tvRoomType);
         TextView tvStatus = popupView.findViewById(R.id.tvStatus);
@@ -168,7 +180,6 @@ public class DenahActivity extends AppCompatActivity {
                 ViewGroup.LayoutParams.WRAP_CONTENT,
                 ViewGroup.LayoutParams.WRAP_CONTENT,
                 true);
-
         popupWindow.setOutsideTouchable(true);
         popupWindow.setElevation(20);
         popupWindow.showAtLocation(pinContainer, Gravity.CENTER, 0, 0);
@@ -176,10 +187,9 @@ public class DenahActivity extends AppCompatActivity {
 
     private List<PinData> getAllPins() {
         List<PinData> pinList = new ArrayList<>();
-        // Data pin yang sudah ada... (tidak diubah)
         pinList.add(new PinData(0.1990, 0.8672, "Game Center", "F", 1, "Rekreasi", false, "15:00"));
         pinList.add(new PinData(0.5634, 0.8672, "F2.1", "F", 2, "Ruang Kelas", true, "09:30"));
-        // ...dan seterusnya
+        // Tambahkan data pin lainnya di sini...
         return pinList;
     }
 
@@ -190,8 +200,6 @@ public class DenahActivity extends AppCompatActivity {
 
     private void saveBookmarks() {
         SharedPreferences prefs = getSharedPreferences("BOOKMARKS", MODE_PRIVATE);
-        // == PERBAIKAN BUG ==
-        // Kunci disamakan menjadi "bookmarked_rooms"
         prefs.edit().putStringSet("bookmarked_rooms", bookmarkedRooms).apply();
     }
 }
