@@ -27,12 +27,11 @@ android {
         }
     }
 
-    // [PERBAIKAN 1: Update versi Java ke 17]
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
     }
-
+}
     dependencies {
         // Dependensi dasar
         implementation(libs.appcompat)
@@ -42,17 +41,15 @@ android {
         implementation("androidx.cardview:cardview:1.0.0")
         implementation("com.github.bumptech.glide:glide:4.16.0")
         annotationProcessor("com.github.bumptech.glide:compiler:4.16.0")
-        implementation("com.google.firebase:firebase-appcheck-safetynet:16.1.2") // SafetyNet adalah provider lama, namun sering digunakan bersama reCAPTCHA
-        implementation("com.google.firebase:firebase-appcheck-playintegrity:17.1.2") // Provider yang lebih baru
 
-
-        // [PERBAIKAN 2: Tambahkan Firebase BoM]
-        // Ini akan mengatur versi semua library Firebase secara otomatis agar kompatibel.
+        // Firebase BoM
         implementation(platform(libs.firebase.bom))
 
-        // [PERBAIKAN 3: Sederhanakan dependensi Firebase]
-        // Sekarang, Anda tidak perlu menentukan versi untuk setiap library Firebase.
-        implementation(libs.firebase.auth) // Versi diatur oleh BoM
+        // [PERBAIKAN] Tambahkan library App Check di sini
+        implementation(libs.firebase.appcheck.playintegrity)
+
+        // Dependensi Firebase lainnya
+        implementation(libs.firebase.auth)
         implementation(libs.play.services.auth)
         implementation(libs.googleid)
         implementation(libs.activity.ktx)
@@ -63,4 +60,3 @@ android {
         androidTestImplementation(libs.ext.junit)
         androidTestImplementation(libs.espresso.core)
     }
-}
