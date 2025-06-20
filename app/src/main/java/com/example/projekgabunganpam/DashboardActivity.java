@@ -9,6 +9,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -30,6 +31,7 @@ public class DashboardActivity extends AppCompatActivity {
     private TextView tvStudentName, tvStudentId, tvStudentEmail;
     private Button btnLogout;
     private ImageView ivBookmark;
+    private CardView profileCard;
     private FirebaseAuth mAuth;
     private FirebaseFirestore db;
 
@@ -46,6 +48,7 @@ public class DashboardActivity extends AppCompatActivity {
         tvStudentEmail = findViewById(R.id.tvStudentEmail);
         btnLogout = findViewById(R.id.btnLogout);
         ivBookmark = findViewById(R.id.ivBookmark);
+        profileCard = findViewById(R.id.profileCard);
 
         // Listener untuk Tombol Logout (INI SUDAH BENAR)
         btnLogout.setOnClickListener(v -> {
@@ -60,6 +63,11 @@ public class DashboardActivity extends AppCompatActivity {
         ivBookmark.setOnClickListener(v -> {
             // Kode ini HANYA membuka ActivityTerbaru, tidak melakukan logout.
             Intent intent = new Intent(DashboardActivity.this, ActivityTerbaru.class);
+            startActivity(intent);
+        });
+
+        profileCard.setOnClickListener(v -> {
+            Intent intent = new Intent(DashboardActivity.this, ProfileActivity.class);
             startActivity(intent);
         });
 

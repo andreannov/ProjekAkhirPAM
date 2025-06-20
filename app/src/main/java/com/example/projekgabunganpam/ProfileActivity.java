@@ -1,12 +1,18 @@
-package com.example.projekgabunganpam; // Sesuaikan dengan package proyek Anda
+package com.example.projekgabunganpam;
 
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Looper;
+import android.util.Log;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 public class ProfileActivity extends AppCompatActivity {
 
@@ -16,11 +22,18 @@ public class ProfileActivity extends AppCompatActivity {
     private TextView tvStudentId;
     private TextView tvStudentEmail;
 
+    // [PERBAIKAN] Deklarasi untuk Firebase Auth dan Firestore
+    private FirebaseAuth mAuth;
+    private FirebaseFirestore db;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        // Pastikan nama file XML Anda adalah activity_profile.xml
         setContentView(R.layout.activity_profile);
+
+        // [PERBAIKAN] Inisialisasi Firebase
+        mAuth = FirebaseAuth.getInstance();
+        db = FirebaseFirestore.getInstance();
 
         // Inisialisasi semua view dari layout
         initializeViews();
@@ -28,7 +41,7 @@ public class ProfileActivity extends AppCompatActivity {
         // Setup listener untuk tombol kembali
         setupListeners();
 
-        // Memulai proses pengambilan data profil (simulasi)
+        // Memulai proses pengambilan data profil dari Firestore
         fetchUserProfile();
     }
 
@@ -45,24 +58,48 @@ public class ProfileActivity extends AppCompatActivity {
     }
 
     /**
-     * Metode ini mensimulasikan pengambilan data pengguna dari server.
-     * Di aplikasi nyata, di sinilah Anda akan memanggil Firebase atau API backend Anda.
+     * [PERBAIKAN] Metode ini sekarang mengambil data pengguna dari Firestore
+     * bukan lagi menggunakan data dummy.
      */
     private void fetchUserProfile() {
-        // Teks "Loading..." sudah diatur di XML, jadi kita tidak perlu mengaturnya lagi.
-        // Kita gunakan Handler untuk menunda eksekusi selama 2 detik (2000 milidetik)
-        // untuk mensimulasikan waktu yang dibutuhkan untuk mengambil data dari internet.
-        new Handler(Looper.getMainLooper()).postDelayed(() -> {
-            // Data dummy sebagai contoh
-            String name = "Budi Santoso";
-            String nim = "215150700111001";
-            String email = "budi.s@student.ub.ac.id";
+        FirebaseUser user = mAuth.getCurrentUser();
+        if (user != null) {
+            // Tampilkan "Loading..." selagi mengambil data
+            tvStudentName.setText("Loading...");
+            tvStudentId.setText("Loading...");
+            tvStudentEmail.setText("Loading...");
 
-            // Setelah data "didapatkan", perbarui TextViews
-            tvStudentName.setText(name);
-            tvStudentId.setText(nim);
-            tvStudentEmail.setText(email);
+            String uid = user.getUid();
+            DocumentReference docRef = db.collection("users").document(uid);
 
-        }, 2000); // Penundaan selama 2 detik
+            docRef.get().addOnCompleteListener(task -> {
+                if (task.isSuccessful()) {
+                    DocumentSnapshot document = task.getResult();
+                    if (document.exists()) {
+                        // Ambil data dari dokumen Firestore
+                        String name = document.getString("name");
+                        String email = document.getString("email");
+                        String nim = document.getString("nim");
+
+                        // Setelah data didapatkan, perbarui TextViews
+                        tvStudentName.setText(name);
+                        tvStudentEmail.setText(email);
+                        tvStudentId.setText(nim != null ? nim : "NIM belum diatur");
+
+                    } else {
+                        Log.d("ProfileActivity", "No such document");
+                        Toast.makeText(ProfileActivity.this, "Data profil tidak ditemukan.", Toast.LENGTH_SHORT).show();
+                        tvStudentName.setText("Data tidak ada");
+                    }
+                } else {
+                    Log.w("ProfileActivity", "get failed with ", task.getException());
+                    Toast.makeText(ProfileActivity.this, "Gagal memuat data profil.", Toast.LENGTH_SHORT).show();
+                }
+            });
+        } else {
+            // Handle kasus jika tidak ada pengguna yang login
+            Toast.makeText(this, "Tidak ada pengguna yang login.", Toast.LENGTH_LONG).show();
+            finish(); // Kembali ke halaman sebelumnya
+        }
     }
 }
