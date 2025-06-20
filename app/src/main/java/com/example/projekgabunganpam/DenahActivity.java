@@ -188,16 +188,16 @@ public class DenahActivity extends AppCompatActivity {
         pinList.add(new PinData(0.1990, 0.8672, "Game Center", "F", 1, "Rekreasi", false, "15:00"));
 
         // Gedung F - Lantai 2
-        pinList.add(new PinData(0.5634, 0.8672, "F2.1", "F", 2, "Ruang Kelas", true, "09:30"));
-        pinList.add(new PinData(0.7842, 0.8655, "F2.2", "F", 2, "Ruang Kelas", false, "13:00"));
-        pinList.add(new PinData(0.9378, 0.8087, "F2.4", "F", 2, "Ruang Kelas", true, "11:00"));
-        pinList.add(new PinData(0.9361, 0.5014, "F2.5", "F", 2, "Ruang Kelas", false, "14:15"));
-        pinList.add(new PinData(0.9462, 0.2248, "F2.6", "F", 2, "Ruang Kelas", false, "16:00"));
-        pinList.add(new PinData(0.7926, 0.1539, "F2.8", "F", 2, "Ruang Kelas", false, "08:00"));
-        pinList.add(new PinData(0.5622, 0.1492, "F2.9", "F", 2, "Ruang Kelas", true, "10:45"));
-        pinList.add(new PinData(0.2784, 0.6645, "F2.10", "F", 2, "Ruang Kerja Bersama", false, "-"));
-        pinList.add(new PinData(0.2116, 0.3454, "F2.11", "F", 2, "Ruang Baca", true, "-"));
-        pinList.add(new PinData(0.0714, 0.6693, "F2.12", "F", 2, "Ruang Kerja Bersama", false, "-"));
+        pinList.add(new PinData(0.385, 0.600, "F2.1", "F", 2, "Ruang Kelas", true, "09:30"));
+        pinList.add(new PinData(0.385, 0.795, "F2.2", "F", 2, "Ruang Kelas", false, "13:00"));
+        pinList.add(new PinData(0.385, 0.930, "F2.4", "F", 2, "Ruang Kelas", true, "11:00"));
+        pinList.add(new PinData(0.650, 0.930, "F2.5", "F", 2, "Ruang Kelas", false, "14:15"));
+        pinList.add(new PinData(0.880, 0.930, "F2.6", "F", 2, "Ruang Kelas", false, "16:00"));
+        pinList.add(new PinData(0.880, 0.795, "F2.8", "F", 2, "Ruang Kelas", false, "08:00"));
+        pinList.add(new PinData(0.880, 0.600, "F2.9", "F", 2, "Ruang Kelas", true, "10:45"));
+        pinList.add(new PinData(0.300, 0.400, "F2.10", "F", 2, "Ruang Kerja Bersama", false, "-"));
+        pinList.add(new PinData(0.420, 0.430, "F2.11", "F", 2, "Ruang Baca", true, "-"));
+        pinList.add(new PinData(0.150, 0.200, "F2.12", "F", 2, "Ruang Kerja Bersama", false, "-"));
 
         // Gedung F - Lantai 3
         pinList.add(new PinData(0.4720, 0.8962, "F3.1", "F", 3, "Ruang Kelas", false, "08:00"));
