@@ -184,9 +184,84 @@ public class DenahActivity extends AppCompatActivity {
 
     private List<PinData> getAllPins() {
         List<PinData> pinList = new ArrayList<>();
+        // Gedung F - Lantai 1
         pinList.add(new PinData(0.1990, 0.8672, "Game Center", "F", 1, "Rekreasi", false, "15:00"));
+
+        // Gedung F - Lantai 2
         pinList.add(new PinData(0.5634, 0.8672, "F2.1", "F", 2, "Ruang Kelas", true, "09:30"));
-        // Tambahkan data pin lainnya di sini...
+        pinList.add(new PinData(0.7842, 0.8655, "F2.2", "F", 2, "Ruang Kelas", false, "13:00"));
+        pinList.add(new PinData(0.9378, 0.8087, "F2.4", "F", 2, "Ruang Kelas", true, "11:00"));
+        pinList.add(new PinData(0.9361, 0.5014, "F2.5", "F", 2, "Ruang Kelas", false, "14:15"));
+        pinList.add(new PinData(0.9462, 0.2248, "F2.6", "F", 2, "Ruang Kelas", false, "16:00"));
+        pinList.add(new PinData(0.7926, 0.1539, "F2.8", "F", 2, "Ruang Kelas", false, "08:00"));
+        pinList.add(new PinData(0.5622, 0.1492, "F2.9", "F", 2, "Ruang Kelas", true, "10:45"));
+        pinList.add(new PinData(0.2784, 0.6645, "F2.10", "F", 2, "Ruang Kerja Bersama", false, "-"));
+        pinList.add(new PinData(0.2116, 0.3454, "F2.11", "F", 2, "Ruang Baca", true, "-"));
+        pinList.add(new PinData(0.0714, 0.6693, "F2.12", "F", 2, "Ruang Kerja Bersama", false, "-"));
+
+        // Gedung F - Lantai 3
+        pinList.add(new PinData(0.4720, 0.8962, "F3.1", "F", 3, "Ruang Kelas", false, "08:00"));
+        pinList.add(new PinData(0.5806, 0.5676, "F3.2", "F", 3, "Ruang Kelas", true, "09:45"));
+        pinList.add(new PinData(0.6724, 0.8962, "F3.3", "F", 3, "Ruang Kelas", false, "11:00"));
+        pinList.add(new PinData(0.6757, 0.5629, "F3.4", "F", 3, "Ruang Kelas", true, "13:00"));
+        pinList.add(new PinData(0.7876, 0.5652, "F3.5", "F", 3, "Ruang Kelas", false, "14:30"));
+        pinList.add(new PinData(0.8310, 0.9104, "F3.6A", "F", 3, "Ruang Kelas", true, "15:30"));
+        pinList.add(new PinData(0.9495, 0.9080, "F3.6B", "F", 3, "Ruang Kelas", false, "10:00"));
+        pinList.add(new PinData(0.8193, 0.0806, "F3.7A", "F", 3, "Ruang Kelas", false, "12:15"));
+        pinList.add(new PinData(0.9545, 0.0853, "F3.7B", "F", 3, "Ruang Kelas", true, "13:30"));
+        pinList.add(new PinData(0.7859, 0.4210, "F3.8", "F", 3, "Ruang Kelas", false, "09:00"));
+        pinList.add(new PinData(0.6824, 0.0924, "F3.9", "F", 3, "Ruang Kelas", true, "10:30"));
+        pinList.add(new PinData(0.6807, 0.4305, "F3.10", "F", 3, "Ruang Kelas", false, "16:00"));
+        pinList.add(new PinData(0.4787, 0.0995, "F3.11", "F", 3, "Ruang Kelas", true, "11:30"));
+        pinList.add(new PinData(0.5605, 0.4258, "F3.12", "F", 3, "Ruang Kelas", false, "13:15"));
+        pinList.add(new PinData(0.2667, 0.6267, "F3.13", "F", 3, "Ruang Kelas", true, "15:00"));
+        pinList.add(new PinData(0.2600, 0.3596, "F3.14", "F", 3, "Ruang Kelas", false, "08:30"));
+        pinList.add(new PinData(0.1765, 0.6243, "F3.15", "F", 3, "Ruang Kelas", false, "10:45"));
+        pinList.add(new PinData(0.1682, 0.3619, "F3.16", "F", 3, "Ruang Kelas", true, "12:00"));
+        pinList.add(new PinData(0.0547, 0.6338, "F3.17", "F", 3, "Ruang Kelas", false, "13:45"));
+        pinList.add(new PinData(0.0530, 0.3619, "F3.18", "F", 3, "Ruang Kelas", true, "15:15"));
+
+        // Gedung F - Lantai 4
+        pinList.add(new PinData(0.6790, 0.7922, "F4.1", "F", 4, "Ruang Kelas", false, "08:00"));
+        pinList.add(new PinData(0.5806, 0.5629, "F4.2", "F", 4, "Ruang Kelas", true, "09:00"));
+        pinList.add(new PinData(0.6841, 0.5652, "F4.3", "F", 4, "Ruang Kelas", false, "10:00"));
+        pinList.add(new PinData(0.7742, 0.5723, "F4.4", "F", 4, "Ruang Kelas", true, "11:00"));
+        pinList.add(new PinData(0.7742, 0.4258, "F4.5", "F", 4, "Ruang Kelas", false, "12:00"));
+        pinList.add(new PinData(0.6707, 0.4328, "F4.6", "F", 4, "Ruang Kelas", true, "13:00"));
+        pinList.add(new PinData(0.5772, 0.4399, "F4.7", "F", 4, "Ruang Kelas", false, "14:00"));
+        pinList.add(new PinData(0.6607, 0.2130, "F4.8", "F", 4, "Ruang Kelas", true, "15:00"));
+        pinList.add(new PinData(0.2700, 0.3643, "F4.9", "F", 4, "Ruang Kelas", false, "16:00"));
+        pinList.add(new PinData(0.2600, 0.6385, "F4.10", "F", 4, "Ruang Kelas", true, "17:00"));
+        pinList.add(new PinData(0.1649, 0.3714, "F4.11", "F", 4, "Ruang Kelas", false, "08:30"));
+        pinList.add(new PinData(0.1598, 0.6385, "F4.12", "F", 4, "Ruang Kelas", true, "09:30"));
+        pinList.add(new PinData(0.0580, 0.3714, "F4.13", "F", 4, "Ruang Kelas", false, "10:30"));
+        pinList.add(new PinData(0.0497, 0.6314, "F4.14", "F", 4, "Ruang Kelas", true, "11:30"));
+
+        // Gedung F - Lantai 5
+        pinList.add(new PinData(0.6123, 0.8493, "F5.1", "F", 5));
+        pinList.add(new PinData(0.7492, 0.8426, "F5.2", "F", 5));
+        pinList.add(new PinData(0.5772, 0.5708, "F5.3", "F", 5));
+        pinList.add(new PinData(0.6390, 0.5674, "F5.4", "F", 5));
+        pinList.add(new PinData(0.7091, 0.5741, "F5.5", "F", 5));
+        pinList.add(new PinData(0.7675, 0.5674, "F5.6", "F", 5));
+        pinList.add(new PinData(0.9011, 0.4970, "F5.7 - F5.8", "F", 5));
+        pinList.add(new PinData(0.7625, 0.4366, "F5.10", "F", 5));
+        pinList.add(new PinData(0.7008, 0.4298, "F5.11", "F", 5));
+        pinList.add(new PinData(0.6306, 0.4366, "F5.12", "F", 5));
+        pinList.add(new PinData(0.5755, 0.4433, "F5.13", "F", 5));
+        pinList.add(new PinData(0.7308, 0.1413, "F5.14", "F", 5));
+        pinList.add(new PinData(0.2567, 0.4768, "F5.15", "F", 5));
+
+        // Gedung G - Lantai 1
+        pinList.add(new PinData(0.8427, 0.1468, "G1.1", "G", 1, "Lab", false, "12.30-15.20"));
+        pinList.add(new PinData(0.8360, 0.8867, "G1.2", "G", 1, "Lab", true, "12.30-15.20"));
+        pinList.add(new PinData(0.6273, 0.1468, "G1.3", "G", 1, "Lab", false, "10.20-14.15"));
+        pinList.add(new PinData(0.6206, 0.8773, "G1.4", "G", 1, "Lab", true, "10.20-14.15"));
+        pinList.add(new PinData(0.4203, 0.1421, "G1.5", "G", 1, "Lab", false, "12.30-15.20"));
+        pinList.add(new PinData(0.4069, 0.8631, "G1.6", "G", 1, "Lab", true, "12.30-15.20"));
+
+        // Gedung G - Lantai 2
+        pinList.add(new PinData(0.1932, 0.4967, "Auditorium Algoritma", "G", 2, "Auditorium", false, "09.00-12.00"));
         return pinList;
     }
 
