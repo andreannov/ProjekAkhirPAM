@@ -24,12 +24,12 @@
             android:clipToOutline="true">
 
             <ImageView
+                android:id="@+id/ivRoomImage"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:scaleType="centerCrop"
                 android:src="@drawable/kelas" />
         </FrameLayout>
-
 
         <LinearLayout
             android:layout_width="0dp"
@@ -38,6 +38,7 @@
             android:orientation="vertical">
 
             <TextView
+                android:id="@+id/tvRoomName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Ruang F3.10"
@@ -51,6 +52,7 @@
                 android:layout_marginBottom="4dp" />
 
             <TextView
+                android:id="@+id/tvRoomType"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Jenis Ruang: Ruang Kelas"
@@ -59,6 +61,7 @@
                 android:fontFamily="@font/poppins_regular" />
 
             <TextView
+                android:id="@+id/tvNotes"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Catatan: Ruang Kelas PAM setiap hari selasa."

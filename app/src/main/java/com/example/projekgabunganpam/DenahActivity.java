@@ -54,7 +54,6 @@ public class DenahActivity extends AppCompatActivity {
         btnBack.setOnClickListener(v -> finish());
 
         TextView tvTitle = findViewById(R.id.tvTitle);
-        // Memastikan judul tetap benar
         if (gedung != null) {
             tvTitle.setText("Denah " + gedung + " - Lantai " + lantai);
         }
@@ -64,11 +63,12 @@ public class DenahActivity extends AppCompatActivity {
         int denahResId = getDenahResource(gedung, lantai);
         if (denahResId != 0) {
             photoView.setImageResource(denahResId);
+
             photoView.setMaximumScale(5.0f);
             photoView.setOnMatrixChangeListener(rect -> updatePinPositions());
         } else {
             Toast.makeText(this, "Denah untuk " + gedung + " Lantai " + lantai + " tidak ditemukan", Toast.LENGTH_LONG).show();
-            photoView.setImageResource(R.drawable.denah_lantaidummy); // Tampilkan gambar dummy jika denah tidak ada
+            photoView.setImageResource(R.drawable.denah_lantaidummy);
         }
 
         List<PinData> pinList = getAllPins();
@@ -79,27 +79,24 @@ public class DenahActivity extends AppCompatActivity {
         }
     }
 
-    // [PERBAIKAN] Logika untuk membuat nama resource file yang benar ada di sini
     private int getDenahResource(String gedung, int lantai) {
         if (gedung == null || gedung.isEmpty()) {
             return 0;
         }
 
-        // Mengambil huruf terakhir dari string "Gedung F" -> "F"
         String buildingInitial = "";
         String[] parts = gedung.split(" ");
         if (parts.length > 1) {
-            buildingInitial = parts[parts.length - 1]; // Mengambil bagian terakhir, yaitu "F" atau "G"
+            buildingInitial = parts[parts.length - 1];
         } else {
-            buildingInitial = gedung; // Jika inputnya hanya "F", gunakan itu
+            buildingInitial = gedung;
         }
 
-        // Membuat nama resource: "denah_lantaif1", "denah_lantaig2", dst.
         String resourceName = "denah_lantai" + buildingInitial.toLowerCase() + lantai;
-
         return getResources().getIdentifier(resourceName, "drawable", getPackageName());
     }
 
+    // ... sisa kode tidak perlu diubah ...
     private void addPin(PinData pin) {
         ImageView pinView = new ImageView(this);
         pinView.setImageResource(R.drawable.ic_pin);

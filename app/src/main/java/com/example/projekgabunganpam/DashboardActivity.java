@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -26,9 +27,9 @@ public class DashboardActivity extends AppCompatActivity {
     List<Building> buildingList;
     BuildingAdapter adapter;
 
-    // [PERUBAHAN] Tambahkan variabel untuk data profil dan Firebase
     private TextView tvStudentName, tvStudentId, tvStudentEmail;
     private Button btnLogout;
+    private ImageView ivBookmark;
     private FirebaseAuth mAuth;
     private FirebaseFirestore db;
 
@@ -37,16 +38,16 @@ public class DashboardActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard);
 
-        // [PERUBAHAN] Inisialisasi Firebase Auth dan Firestore
         mAuth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
 
-        // [PERUBAHAN] Inisialisasi TextViews dan tombol Logout
         tvStudentName = findViewById(R.id.tvStudentName);
         tvStudentId = findViewById(R.id.tvStudentId);
         tvStudentEmail = findViewById(R.id.tvStudentEmail);
         btnLogout = findViewById(R.id.btnLogout);
+        ivBookmark = findViewById(R.id.ivBookmark);
 
+        // Listener untuk Tombol Logout (INI SUDAH BENAR)
         btnLogout.setOnClickListener(v -> {
             mAuth.signOut();
             Toast.makeText(DashboardActivity.this, "Logout berhasil", Toast.LENGTH_SHORT).show();
@@ -54,10 +55,17 @@ public class DashboardActivity extends AppCompatActivity {
             finish();
         });
 
-        // [PERUBAHAN] Panggil metode untuk memuat data profil pengguna
+        // [PERIKSA BAGIAN INI] Listener untuk Ikon Bookmark
+        // Pastikan kodenya persis seperti ini:
+        ivBookmark.setOnClickListener(v -> {
+            // Kode ini HANYA membuka ActivityTerbaru, tidak melakukan logout.
+            Intent intent = new Intent(DashboardActivity.this, ActivityTerbaru.class);
+            startActivity(intent);
+        });
+
         loadUserProfile();
 
-        // Kode untuk RecyclerView gedung tetap sama
+        // Kode untuk RecyclerView gedung
         recyclerView = findViewById(R.id.rvBuildings);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
@@ -77,7 +85,6 @@ public class DashboardActivity extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
     }
 
-    // [PERUBAHAN] Metode baru untuk mengambil data dari Firestore
     private void loadUserProfile() {
         FirebaseUser user = mAuth.getCurrentUser();
         if (user != null) {
@@ -91,8 +98,7 @@ public class DashboardActivity extends AppCompatActivity {
                         Log.d("Dashboard", "DocumentSnapshot data: " + document.getData());
                         String name = document.getString("name");
                         String email = document.getString("email");
-                        // Asumsikan NIM belum ada, jadi kita set manual
-                        String nim = document.getString("nim"); // akan null jika belum ada
+                        String nim = document.getString("nim");
 
                         tvStudentName.setText(name);
                         tvStudentEmail.setText(email);

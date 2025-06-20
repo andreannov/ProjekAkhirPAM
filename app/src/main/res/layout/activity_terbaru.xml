@@ -1,14 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@drawable/bg_gradient"
     android:padding="16dp">
 
-    <!-- Tombol Kembali -->
     <ImageButton
         android:id="@+id/btnBack"
         android:layout_width="32dp"
@@ -17,7 +15,6 @@
         android:contentDescription="Back Button"
         android:src="@drawable/ic_back" />
 
-    <!-- Tab Terbaru & Favorite -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="48dp"
@@ -26,7 +23,6 @@
         android:background="@drawable/bg_tab_container"
         android:orientation="horizontal"
         android:padding="4dp">
-
         <Button
             android:id="@+id/btnTerbaru"
             android:layout_width="0dp"
@@ -50,7 +46,6 @@
             android:fontFamily="@font/poppins_bold" />
     </LinearLayout>
 
-    <!-- Background putih setengah lingkaran + konten -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -61,7 +56,6 @@
         android:paddingBottom="0dp"
         android:gravity="center_horizontal">
 
-        <!-- Judul -->
         <TextView
             android:id="@+id/tvBookmark"
             android:layout_width="wrap_content"
@@ -72,32 +66,12 @@
             android:fontFamily="@font/josefinsans_bold"
             android:layout_marginBottom="16dp" />
 
-        <!-- Scroll List -->
-        <ScrollView
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvBookmarks"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
-            android:paddingHorizontal="16dp">
+            android:paddingHorizontal="16dp" />
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:paddingBottom="16dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginBottom="8dp"
-                android:divider="@android:color/transparent"
-                android:showDividers="middle"
-                android:dividerHeight="12dp">
-
-                <!-- Bookmark Items -->
-                <include layout="@layout/item_bookmark" />
-                <include layout="@layout/item_bookmark" />
-                <include layout="@layout/item_bookmark" />
-                <include layout="@layout/item_bookmark" />
-                <include layout="@layout/item_bookmark" />
-
-            </LinearLayout>
-        </ScrollView>
     </LinearLayout>
 </LinearLayout>
